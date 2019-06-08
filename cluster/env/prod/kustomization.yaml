@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+  # Installs ArgoCD into the cluster and installs
+  # ArgoCD apps to sync the apps in this repo
+bases:
+- ../../base
+- ../../../argocd/cluster
+
+  # Syncs this cluster config via an ArgoCD app
+resources:
+- ./argocd-app-cluster.yaml
+
+patchesStrategicMerge:
+- ./ingress.yaml

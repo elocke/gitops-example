@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress
+  annotations:
+    kubernetes.io/ingress.class: "gce"
+    kubernetes.io/ingress.allow-http: "true"
+    kubernetes.io/ingress.global-static-ip-name: "<set-in-kustomization>"
+spec:
+  # Our default ingress backend. Port 80 is protected with IAP (see ambassador Service)
+  backend:
+    serviceName: ambassador
+    servicePort: 80
+  rules:
+    # A specific ingress exception to bypass IAP for Github webhooks. Port 81 (see ambassador Service)
+    # does not use the IAP backend config
+    - host: argocd.k8s.evanlocke.me
+      http:
+        paths:
+          - path: /api/webhook
+            backend:
+              serviceName: ambassador
+              servicePort: 81

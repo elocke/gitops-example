@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: argocd-server
+  annotations:
+    getambassador.io/config: |-
+      ---
+      apiVersion: ambassador/v1
+      kind:  Mapping
+      name: argo-cd-mapping
+      prefix: /
+      host: argocd.k8s.evanlocke.me
+      service: argocd-server.argocd:80
+      timeout_ms: 600000

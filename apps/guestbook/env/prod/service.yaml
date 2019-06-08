@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: guestbook
+  annotations:
+    getambassador.io/config: |
+      ---
+      apiVersion: ambassador/v1
+      kind:  Mapping
+      name:  guestbook-mapping-prod
+      host: ^(\-?k8s.*|.)?guestbook.evanlocke.me$
+      host_regex: true
+      prefix: /
+      service: guestbook.prod:80

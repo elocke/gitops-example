@@ -1,0 +1,1 @@
+You can add kustomize overlays here to deploy another cluster using the same config. Other methods of this deployment could be a base branch for all your clusters and then the overlays are other branches in git with a more customized deployment per cluster.

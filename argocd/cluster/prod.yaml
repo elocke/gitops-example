@@ -1,0 +1,12 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: prod
+  namespace: argocd
+spec:
+  description: Production
+  destinations:
+  - namespace: prod
+    server: https://kubernetes.default.svc
+  sourceRepos:
+  - git@github.com:elocke/gitops-example.git

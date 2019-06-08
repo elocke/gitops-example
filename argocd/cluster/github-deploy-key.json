@@ -1,0 +1,13 @@
+{
+  "kind": "SealedSecret",
+  "apiVersion": "bitnami.com/v1alpha1",
+  "metadata": {
+    "name": "github-deploy-key",
+    "namespace": "argocd"
+  },
+  "spec": {
+    "encryptedData": {
+      "ssh-private-key": "ddd"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+# This ArgoCD application definition creates an ArgoCD app that will bootstrap
+# the application definitions specified in this directory.
+#
+# Once bootstrapped, this configuration will update itself via Git commits
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-apps
+  namespace: argocd
+spec:
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: argocd/apps
+    repoURL: git@github.com:elocke/gitops-example.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true

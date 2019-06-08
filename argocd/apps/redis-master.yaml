@@ -1,0 +1,38 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prod-redis-master
+  namespace: argocd
+spec:
+  destination:
+    namespace: prod
+    server: https://kubernetes.default.svc
+  project: prod
+  source:
+    environment: prod
+    path: apps/redis-master/env/prod
+    repoURL: git@github.com:elocke/gitops-example.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: staging-redis-master
+  namespace: argocd
+spec:
+  destination:
+    namespace: staging
+    server: https://kubernetes.default.svc
+  project: staging
+  source:
+    environment: staging
+    path: apps/redis-master/env/staging
+    repoURL: git@github.com:elocke/gitops-example.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
